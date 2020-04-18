@@ -98,6 +98,7 @@
     <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="OverrideImplement.combined" value="false" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="dynamic.classpath" value="false" />
@@ -237,6 +238,10 @@
       <screen x="0" y="0" width="1366" height="735" />
     </state>
     <state x="491" y="86" width="374" height="560" key="#com.intellij.ide.util.MemberChooser/0.0.1366.735@0.0.1366.735" timestamp="1587141904121" />
+    <state x="254" y="0" width="848" height="733" key="CommitChangelistDialog2" timestamp="1587196466142">
+      <screen x="0" y="0" width="1366" height="735" />
+    </state>
+    <state x="254" y="0" width="848" height="733" key="CommitChangelistDialog2/0.0.1366.735@0.0.1366.735" timestamp="1587196466142" />
     <state x="242" y="186" width="457" height="163" key="GridCell.Tab.-1.bottom" timestamp="1587120412137">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
@@ -301,6 +306,10 @@
       <screen x="0" y="0" width="1366" height="735" />
     </state>
     <state x="242" y="186" width="457" height="163" key="GridCell.Tab.2.right/0.0.1366.735@0.0.1366.735" timestamp="1587120403856" />
+    <state x="278" y="103" width="800" height="526" key="Vcs.Push.Dialog.v2" timestamp="1587196490690">
+      <screen x="0" y="0" width="1366" height="735" />
+    </state>
+    <state x="278" y="103" width="800" height="526" key="Vcs.Push.Dialog.v2/0.0.1366.735@0.0.1366.735" timestamp="1587196490690" />
     <state x="234" y="107" width="887" height="519" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1587121984154">
       <screen x="0" y="0" width="1366" height="735" />
     </state>
