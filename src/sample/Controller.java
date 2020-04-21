@@ -69,8 +69,9 @@ public class Controller {
     @FXML
     private NumberAxis axisY;
 
-    double[] valuesX = new double[]{};
-    double[][] valuesXY = new double[][]{};
+    Model model = new Model();
+    View view =  new View(model);
+
     XYChart.Series series = new XYChart.Series<>();
 
     @FXML
@@ -79,16 +80,13 @@ public class Controller {
         tableColumnY.setCellValueFactory(new PropertyValueFactory<>("y"));
         TableView.TableViewSelectionModel selectionModel = tableView.getSelectionModel();
 
-        series.setName("y = x²+6x+10");
-        axisX.setLabel("x value");
-        axisY.setLabel("y value");
-        addDataOnChart(areaChart, series);
+        resetChart();
 
         addButton.setOnAction(event -> {
             Random random = new Random();
             double x = random.nextInt(50);
-            valuesX = addValueToArray(x, valuesX);
-            updateTable();
+            model.add(x);
+            updateTableAndSeries();
         });
 
         updateButton.setOnAction(event -> {
@@ -103,13 +101,13 @@ public class Controller {
                 Button add = new Button("Update");
                 Button close = new Button("Close");
 
-                selectedValue = valuesX[index];
+                selectedValue = model.getValuesX()[index];
 
                 textArea.setText(String.valueOf(selectedValue));
                 add.setOnAction(event1 -> {
                     double newValue = Double.valueOf(textArea.getText());
-                    valuesX[index] = newValue;
-                    updateTable();
+                    model.update(newValue,index);
+                    updateTableAndSeries();
                     newWindow.close();
                 });
 
@@ -135,9 +133,9 @@ public class Controller {
         delButton.setOnAction(event -> {
             int index = selectionModel.getSelectedIndex();
             if (index != -1) {
-                valuesX = delValueInArray(valuesX, index);
+                model.del(index);
                 resetChart();
-                updateTable();
+                updateTableAndSeries();
             }
         });
 
@@ -151,40 +149,6 @@ public class Controller {
         return series;
     }
 
-    public void addDataOnChart(StackedAreaChart areaChart, XYChart.Series series) {
-        areaChart.getData().add(series);
-    }
-
-    public double[][] calculateFunctionValues(double[] table) {
-        double x, y;
-        double[][] values = new double[table.length][2];
-        for (int a = 0; a < table.length; a++) {
-            x = table[a];
-            y = x * x + 6 * x + 10;
-            values[a][0] = x;
-            values[a][1] = y;
-        }
-        return values;
-    }
-
-    public double[] addValueToArray(double x, double[] doubles) {
-        doubles = Arrays.copyOf(doubles, doubles.length + 1);
-        doubles[doubles.length - 1] = x;
-        return doubles;
-    }
-
-    public double[] updateValueInArray(double newValue, double[] doubles, int index) {
-        doubles[index] = newValue;
-        return doubles;
-    }
-
-
-    public double[] delValueInArray(double[] doubles, int index) {
-        double[] newDoubles = Arrays.copyOf(doubles, doubles.length - 1);
-        System.arraycopy(doubles, index + 1, newDoubles, index, doubles.length - index - 1);
-        return newDoubles;
-    }
-
     private ObservableList<TableValue> addValuesToList(double[][] values, int count) {
         ObservableList<TableValue> list = FXCollections.observableArrayList();
         for (int a = 0; a < count; a++) {
@@ -194,24 +158,22 @@ public class Controller {
         return list;
     }
 
-    public void updateTable() {
-        valuesXY = calculateFunctionValues(valuesX);
-        addValueOnSeries(valuesXY, valuesX.length, series);
-//        axisX.autosize();
-//        axisY.autosize();
+    public void updateTableAndSeries() {
+        addValueOnSeries(view.getValuesXY(),view.getValuesX().length,series);
         tableView.getItems().clear();
-        tableView.getItems().addAll(addValuesToList(valuesXY, valuesX.length));
+        tableView.getItems().addAll(addValuesToList(view.getValuesXY(),view.getValuesX().length));
     }
 
     public void resetChart() {
         areaChart.getData().remove(series);
-        axisX.resize(areaChart.getWidth(),areaChart.getHeight());
-        axisY.resize(areaChart.getWidth(),areaChart.getHeight());
+
         axisX.setLabel("x value");
         axisY.setLabel("y value");
         series = new XYChart.Series<>();
         series.setName("y = x²+6x+10");
-        addDataOnChart(areaChart, series);
+        areaChart.getData().add(series);
+        axisY.autosize();
+        axisX.autosize();
     }
 
     public class TableValue {

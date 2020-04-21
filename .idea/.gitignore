@@ -1,2 +1,12 @@
 # Default ignored files
+<<<<<<< a4239dc663daf498eea5b6ab2a5d241c35597bf8
 /workspace.xml
+=======
+/shelf/
+/workspace.xml
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+>>>>>>> Сode refactoring
