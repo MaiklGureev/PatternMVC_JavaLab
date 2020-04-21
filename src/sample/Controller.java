@@ -107,6 +107,7 @@ public class Controller {
                 add.setOnAction(event1 -> {
                     double newValue = Double.valueOf(textArea.getText());
                     model.update(newValue,index);
+                    resetChart();
                     updateTableAndSeries();
                     newWindow.close();
                 });
