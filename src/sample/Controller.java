@@ -105,11 +105,17 @@ public class Controller {
 
                 textArea.setText(String.valueOf(selectedValue));
                 add.setOnAction(event1 -> {
+                    try{
                     double newValue = Double.valueOf(textArea.getText());
                     model.update(newValue,index);
                     resetChart();
                     updateTableAndSeries();
                     newWindow.close();
+                    }
+                    catch (NumberFormatException e){
+                        textArea.setText("Ошибка ввода числа!");
+                    }
+
                 });
 
                 close.setOnAction(event1 -> {
